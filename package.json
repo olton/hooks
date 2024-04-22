@@ -13,6 +13,7 @@
     "build": "npm run clean && cross-env NODE_ENV=production rollup -c",
     "dev": "cross-env NODE_ENV=development rollup -c",
     "watch": "cross-env NODE_ENV=development rollup -c -w",
+    "pub": "npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
