@@ -26,7 +26,6 @@ const useState = (initialState, onStateChange) => {
             target[prop] = value;
             if (typeof onStateChange === "function") {
                 onStateChange({
-                    target,
                     prop,
                     oldVal: old,
                     newVal: value
