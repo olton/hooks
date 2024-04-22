@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="text-center">
+    <h1>Hello World!</h1>
+    <button id="b1">Clicks (0)</button>
+    <button id="b2">Clicks (0)</button>
+</div>
+<script src="../lib/hooks.js"></script>
+<script>
+    function onStateChange(){
+        console.log([...arguments])
+    }
+
+    {
+        const [state, setState] = Hooks.useState(0, onStateChange)
+        document.querySelector('#b1').addEventListener('click', function () {
+            setState(state() + 1)
+            this.textContent = `Clicks (${state()})`
+        });
+    }
+
+    {
+        Hooks.useEvent(()=>{ console.log(`Window loaded`) })
+    }
+</script>
+</body>
+</html>
