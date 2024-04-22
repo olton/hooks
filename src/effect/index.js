@@ -9,10 +9,11 @@ const USE_EFFECT_EVENTS = {
 const useEffectDefaults = {
     effect: f => f,
     target: globalThis,
-    event: 'load'
+    event: 'load',
+    root: null
 }
 
-const useEffect = ({effect, target, event} = useEffectDefaults) => {
+const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
     let _target, _event = event.toLowerCase()
 
     if (typeof effect !== "function") {
@@ -30,6 +31,8 @@ const useEffect = ({effect, target, event} = useEffectDefaults) => {
             _target = document.querySelector(target)
         } else if (target instanceof HTMLElement) {
             _target = target
+        } else {
+            throw Error(`Invalid target element!`)
         }
     }
 
@@ -51,8 +54,9 @@ const useEffect = ({effect, target, event} = useEffectDefaults) => {
             })
         }
     } else if (_event === USE_EFFECT_EVENTS.VIEWPORT) {
+        let _root = root === null ? null : typeof root === "string" ? document.querySelector(root) : root
         const observerOptions = {
-            root: null,
+            root: _root,
             rootMargin: "0px",
             threshold: 0.5
         }

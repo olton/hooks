@@ -87,5 +87,51 @@ useEvent({
 })
 ```
 
-
 ### useEffect
+This hook is designed to trigger the effect under certain conditions:
+- `load` - perform the effect when the element appears in the document
+- `viewport` - perform the effect when the element appears in the viewport
+- `attribute` - perform the effect when the element attribute(s) changed
+- `children` - perform the effect when the element children changed (add or remove)
+- `data` - perform the effect when the element text content was changed
+
+```javascript
+import { useEffect, USE_EFFECT_EVENTS } from "@olton/hooks"
+
+useEffect({
+    target: "#btn",
+    event: USE_EFFECT_EVENTS.LOAD,
+    effect: (target) => console.log(`Element added to document`)
+})
+
+useEffect({
+    target: "#btn",
+    event: USE_EFFECT_EVENTS.VIEWPORT,
+    effect: (target) => console.log(`Element showing in viewport`)
+})
+
+useEffect({
+    target: "#btn",
+    root: "#root-element",
+    event: USE_EFFECT_EVENTS.VIEWPORT,
+    effect: (target) => console.log(`Element showing in root element`)
+})
+
+useEffect({
+    target: "#btn",
+    event: USE_EFFECT_EVENTS.ATTRIBUTE,
+    effect: (target, attribute, value) => console.log(`Attribute changed in Element`)
+})
+
+useEffect({
+    target: "#btn",
+    event: USE_EFFECT_EVENTS.CHILDREN,
+    effect: (target, addedNodes, removedNodes) => console.log(`Element children changed`)
+})
+
+useEffect({
+    target: "#btn",
+    event: USE_EFFECT_EVENTS.DATA,
+    effect: (target, textContent) => console.log(`Element text content was changed`)
+})
+```
