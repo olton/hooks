@@ -22,7 +22,7 @@ export default [
             progress({ clearLine: true, }),
         ],
         output: {
-            file: production ? 'lib/hooks.min.js' : 'lib/hooks.js',
+            file: 'lib/hooks.js',
             format: 'iife',
             name: 'Hooks',
             sourcemap,

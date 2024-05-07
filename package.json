@@ -1,10 +1,10 @@
 {
   "name": "@olton/hooks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The set of js hooks.",
   "type": "module",
-  "main": "dist/state-machine.cjs.js",
-  "module": "dist/state-machine.esm.js",
+  "main": "dist/hooks.cjs.js",
+  "module": "dist/hooks.esm.js",
   "files": [
     "dist"
   ],

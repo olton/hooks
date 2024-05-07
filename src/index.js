@@ -1,6 +1,6 @@
-import {useState} from "./state/index.js"
-import {useEvent} from "./event/index.js"
-import {useEffect, USE_EFFECT_EVENTS} from "./effect/index.js"
+import {useState} from "./state.js"
+import {useEvent} from "./event.js"
+import {useEffect, USE_EFFECT_EVENTS} from "./effect.js"
 
 export {
     useState,
