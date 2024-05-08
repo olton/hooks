@@ -1,5 +1,7 @@
 import terser from '@rollup/plugin-terser'
-import progress from 'rollup-plugin-progress';
+import progress from 'rollup-plugin-progress'
+import pkg from "./package.json" assert {type: "json"}
+import fs from "node:fs"
 
 const production = process.env.NODE_ENV === 'production',
     sourcemap = !production
@@ -11,6 +13,11 @@ const banner = `
  * Licensed under MIT
  !*/
 `
+
+let txt = fs.readFileSync(`src/index.js`, 'utf8')
+txt = txt.replace(/version = ".+"/g, `version = "${pkg.version}"`)
+txt = txt.replace(/build_time = ".+"/g, `build_time = "${new Date().toLocaleString()}"`)
+fs.writeFileSync(`src/index.js`, txt, { encoding: 'utf8', flag: 'w+' })
 
 export default [
     {

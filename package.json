@@ -1,6 +1,6 @@
 {
   "name": "@olton/hooks",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.cjs.js",
@@ -29,11 +29,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.5",
     "cross-env": "^7.0.3",
     "rollup": "^4.15.0",
-    "shx": "^0.3.4"
-  },
-  "dependencies": {
+    "shx": "^0.3.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup-plugin-progress": "^1.1.2"
   }
