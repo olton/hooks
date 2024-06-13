@@ -1,26 +1,23 @@
-const states = new Map()
-let index = 0
+let state = [];
+let stateIndex = -1
 
 const useState = (initialState, onStateChange) => {
-    const stateIndex = index
-    states.set(index, initialState)
-    index++
+    const index = stateIndex++
+    state[index] = {value: initialState};
 
-    const getState = () => {
-        return states.get(stateIndex)
-    }
+    const setState = arg => {
+        const old = state[index].value
 
-    const setState = (newState) => {
-        const oldState = states.get(stateIndex)
-        states.set(stateIndex, typeof newState === "object" ? Object.assign({}, newState) : newState)
-        if (typeof onStateChange === 'function') {
-            onStateChange(states.get(stateIndex), oldState)
+        state[index].value = typeof arg === "function" ? arg(old) : arg
+
+        if (typeof onStateChange === "function") {
+            onStateChange(state[index].value, old)
         }
     }
 
-    return [getState, setState]
+    return [state[index], setState]
 }
 
 export {
-    useState
+    useState,
 }

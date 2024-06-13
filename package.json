@@ -1,6 +1,6 @@
 {
   "name": "@olton/hooks",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.esm.js",
