@@ -6,12 +6,13 @@ Current implemented:
 + [x] [useState()](#usestate)
 + [x] [useEvent()](#useevent)
 + [x] [useEffect()](#useffect)
++ [x] [useMemo()](#usememo)
 
 ## Using
 
 ### Direct into browser
 ```html
-<script src="https://cdn.jsdelivr.net/gh/olton/hooks/lib/hooks.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@olton/hooks@latest"></script>
 <script>
     Hooks.useEffect({...})
 </script>
@@ -37,33 +38,36 @@ The function `useState` - returns a tuple with two functions: `state()` - getter
 
 #### Example of usage:
 ```html
-<button id="btn">Clicks (0)</button>
+<button id="bt1">Clicks (0)</button>
+<button id="bt2">Clicks (0)</button>
 ```
 
 ```javascript
-import { useState } from "@olton/hooks"
-
-const [state, setState] = useState(0)
-const button = document.querySelector("#btn")
-button.addEventListener("click", (e) => {
-    setState( state() + 1 )
-    e.target.textContent = `Clicks (${state()})`
-})
-```
-
-```javascript
-import { useState } from "@olton/hooks"
-
-const onStateChange = ({prop, oldVal, newVal}) => {
-    console.log("ku")
+function onStateChange(){
+    console.log([...arguments])
 }
 
-const [state, setState] = useState(0, onStateChange)
-const button = document.querySelector("#btn")
-button.addEventListener("click", (e) => {
-    setState( state() + 1 )
-    e.target.textContent = `Clicks (${state()})`
-})
+{
+    const [state1, setState1] = Hooks.useState(0, onStateChange)
+    document.querySelector('#b1').addEventListener('click', function () {
+        setState1(state1.value + 1)
+        setTimeout(()=>{
+            this.textContent = `Clicks (${state1.value})`
+        }, 100)
+    });
+}
+
+{
+    const [state2, setState2] = Hooks.useState(1, onStateChange)
+    document.querySelector('#b2').addEventListener('click', function () {
+        setState2((old) => {
+            return old * 2
+        })
+        setTimeout(()=>{
+            this.textContent = `Clicks (${state2.value})`
+        }, 100)
+    });
+}
 ```
 
 ### useEvent
@@ -134,4 +138,18 @@ useEffect({
     event: USE_EFFECT_EVENTS.DATA,
     effect: (target, textContent) => console.log(`Element text content was changed`)
 })
+```
+
+### useMemo
+Do memoization with hook `useMemo`. You can pass function as argument to `useMemo` and return memoized function.
+```javascript
+import {useMemo} from "@olton/hooks"
+
+const factorial = Hooks.useMemo( n => {
+    return n <= 1 ? 1 : n * factorial(n-1)
+})
+
+console.log(factorial(5)) // calc
+console.log(factorial(5)) // use cache for 1!, 2!, 3!, 4!, 5!
+
 ```
