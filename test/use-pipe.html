@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="text-center">
+    <h1>Hello World!</h1>
+    <button id="b1">Clicks (0)</button>
+    <button id="b2">Clicks (0)</button>
+</div>
+<script src="../lib/hooks.js"></script>
+<script>
+
+    Hooks.info()
+
+    const fn1 = v => v + " world!"
+    const fn2 = v => v + " usePipe()"
+    const fn3 = v => v + " Enjoy!"
+
+    const pipeResult = Hooks.usePipe(fn1, fn2, fn3)("Hello")
+    console.log(pipeResult)
+</script>
+</body>
+</html>

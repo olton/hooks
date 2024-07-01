@@ -7,6 +7,10 @@ Current implemented:
 + [x] [useEvent()](#useevent)
 + [x] [useEffect()](#useffect)
 + [x] [useMemo()](#usememo)
++ [x] [usePipe](#usepipe)
++ [x] [useDebounce](#usedebounce)
++ [x] [useCurry](#usecurry)
++ [x] [useCompose](#usecompose)
 
 ## Using
 
@@ -152,4 +156,18 @@ const factorial = Hooks.useMemo( n => {
 console.log(factorial(5)) // calc
 console.log(factorial(5)) // use cache for 1!, 2!, 3!, 4!, 5!
 
+```
+
+### usePipe
+```javascript
+import {usePipe} from "@olton/hooks"
+
+const fn1 = v => v + " world!"
+const fn2 = v => v + " usePipe()"
+const fn3 = v => v + " Enjoy!"
+
+const pipeResult = Hooks.usePipe(fn1, fn2, fn3)("Hello")
+
+console.log(pipeResult)
+// --> Hello world! usePipe() Enjoy!
 ```
