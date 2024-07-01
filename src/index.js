@@ -8,7 +8,7 @@ import {useCurry} from "./curry.js";
 import {useCompose} from "./compose.js";
 
 const version = "0.6.0"
-const build_time = "01.07.2024, 18:09:31"
+const build_time = "01.07.2024, 18:15:34"
 
 const info = () => {
     console.info(`%c Hooks %c v${version} %c ${build_time} `, "color: #ffffff; font-weight: bold; background: #5c2c05", "color: white; background: darkgreen", "color: white; background: #0080fe;")
