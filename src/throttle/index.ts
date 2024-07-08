@@ -1,14 +1,17 @@
-const useThrottle = (fn, wait) => {
+const useThrottle = (fn: any, wait: number) => {
     let isThrottled = false
-    let saveThis, saveArgs
+    let saveThis: any
+    let saveArgs: any
 
     function wrapper() {
         if (isThrottled) {
+            // @ts-ignore
             saveThis = this
             saveArgs = arguments
             return
         }
 
+        // @ts-ignore
         fn.apply(this, arguments)
         isThrottled = true
         setTimeout(function (){

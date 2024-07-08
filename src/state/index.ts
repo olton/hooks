@@ -1,11 +1,11 @@
 let state = [];
 let stateIndex = -1
 
-const useState = (initialState, onStateChange) => {
+const useState = (initialState: any, onStateChange: any) => {
     const index = stateIndex++
     state[index] = {value: initialState};
 
-    const setState = arg => {
+    const setState = (arg: any) => {
         const old = state[index].value
 
         state[index].value = typeof arg === "function" ? arg(old) : arg

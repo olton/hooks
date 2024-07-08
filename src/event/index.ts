@@ -1,19 +1,19 @@
-const USE_EFFECT_EVENTS = {
-    LOAD: 'load',
-    VIEWPORT: 'viewport',
-    ATTRIBUTE: 'attribute',
-    CHILDREN: 'children',
-    DATA: 'data',
+enum USE_EVENT_EVENTS {
+    LOAD = 'load',
+    VIEWPORT = 'viewport',
+    ATTRIBUTE = 'attribute',
+    CHILDREN = 'children',
+    DATA = 'data',
 }
 
-const useEffectDefaults = {
-    effect: f => f,
-    target: globalThis,
-    event: 'load',
+type useEventDefaults = {
+    effect: any,
+    target: any,
+    event: USE_EVENT_EVENTS.LOAD,
     root: null
 }
 
-const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
+const useEvent = ({effect, target, event, root}: useEventDefaults) => {
     let _target, _event = event.toLowerCase()
 
     if (typeof effect !== "function") {
@@ -24,7 +24,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
         throw Error(`Please specify a target element!`)
     }
 
-    if (event === USE_EFFECT_EVENTS.LOAD) {
+    if (event === USE_EVENT_EVENTS.LOAD) {
         _target = target;
     } else {
         if (typeof target === "string") {
@@ -36,7 +36,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
         }
     }
 
-    if (_event === USE_EFFECT_EVENTS.LOAD) {
+    if (_event === USE_EVENT_EVENTS.LOAD) {
         const el = document.querySelector(_target)
         if (el !== null) {
             effect(el)
@@ -53,7 +53,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
                 subtree: true,
             })
         }
-    } else if (_event === USE_EFFECT_EVENTS.VIEWPORT) {
+    } else if (_event === USE_EVENT_EVENTS.VIEWPORT) {
         let _root = root === null ? null : typeof root === "string" ? document.querySelector(root) : root
         const observerOptions = {
             root: _root,
@@ -68,7 +68,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
             })
         }, observerOptions)
         observer.observe(_target)
-    } else if (_event === USE_EFFECT_EVENTS.ATTRIBUTE) {
+    } else if (_event === USE_EVENT_EVENTS.ATTRIBUTE) {
         const observer = new MutationObserver((mutations) => {
             for (let mut of mutations) {
                 if (mut.target === _target && mut.type === 'attributes') {
@@ -79,7 +79,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
         observer.observe(_target, {
             attributes: true,
         })
-    } else if (_event === USE_EFFECT_EVENTS.CHILDREN) {
+    } else if (_event === USE_EVENT_EVENTS.CHILDREN) {
         const observer = new MutationObserver((mutations) => {
             for (let mut of mutations) {
                 if (mut.target === _target && mut.type === 'childList') {
@@ -91,7 +91,7 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
             childList: true,
             subtree: true,
         })
-    } else if (_event === USE_EFFECT_EVENTS.DATA) {
+    } else if (_event === USE_EVENT_EVENTS.DATA) {
         const observer = new MutationObserver((mutations) => {
             for (let mut of mutations) {
                 if (mut.target === _target && mut.type === 'characterData') {
@@ -108,6 +108,6 @@ const useEffect = ({effect, target, event, root} = useEffectDefaults) => {
 }
 
 export {
-    useEffect,
-    USE_EFFECT_EVENTS
+    useEvent,
+    USE_EVENT_EVENTS
 }
