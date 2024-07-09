@@ -16,17 +16,18 @@
 <script src="../lib/hooks.js"></script>
 <script>
     const useEvent = Hooks.useEvent
+    const EVENTS = Hooks.USE_EVENT_EVENTS
 
     useEvent({
         effect: (target) => console.log(target),
         target: "#b1",
-        event: Hooks.USE_EVENT_EVENTS.LOAD
+        event: EVENTS.LOAD
     })
 
     useEvent({
         effect: () => alert(`In Viewport`),
         target: "#testDiv",
-        event: Hooks.USE_EVENT_EVENTS.VIEWPORT
+        event: EVENTS.VIEWPORT
     })
 </script>
 </body>

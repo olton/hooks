@@ -4,8 +4,8 @@ import progress from 'rollup-plugin-progress'
 import pkg from "./package.json" assert {type: "json"}
 import fs from "node:fs"
 
-const production = process.env.NODE_ENV === 'production',
-    sourcemap = !production
+const production = process.env.NODE_ENV === 'production'
+const sourcemap = !production
 
 const banner = `
 /*!
@@ -15,10 +15,10 @@ const banner = `
  !*/
 `
 
-let txt = fs.readFileSync(`src/index.ts`, 'utf8')
+let txt = fs.readFileSync("src/index.ts", 'utf8')
 txt = txt.replace(/version = ".+"/g, `version = "${pkg.version}"`)
 txt = txt.replace(/build_time = ".+"/g, `build_time = "${new Date().toLocaleString()}"`)
-fs.writeFileSync(`src/index.ts`, txt, { encoding: 'utf8', flag: 'w+' })
+fs.writeFileSync("src/index.ts", txt, { encoding: 'utf8', flag: 'w+' })
 
 export default [
     {
@@ -67,11 +67,13 @@ export default [
                 file: 'dist/hooks.cjs.js',
                 format: 'cjs',
                 banner,
+                sourcemap,
             },
             {
                 file: 'dist/hooks.esm.js',
                 format: 'esm',
                 banner,
+                sourcemap,
             },
         ]
     },

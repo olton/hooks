@@ -18,7 +18,8 @@
     "dev": "cross-env NODE_ENV=development rollup -c",
     "watch": "cross-env NODE_ENV=development rollup -c -w",
     "pub": "npm publish --access public",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "biome lint --write ./src"
   },
   "keywords": [
     "js",
@@ -38,6 +39,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-terser": "^0.4.4",

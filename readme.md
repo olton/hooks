@@ -5,12 +5,12 @@ Current implemented:
 
 + [x] [useState()](#usestate)
 + [x] [useEvent()](#useevent)
-+ [x] [useEffect()](#useffect)
 + [x] [useMemo()](#usememo)
 + [x] [usePipe](#usepipe)
 + [x] [useDebounce](#usedebounce)
 + [x] [useCurry](#usecurry)
 + [x] [useCompose](#usecompose)
++ [x] [useThrottle](#usethrottle)
 
 ## Using
 
@@ -18,7 +18,7 @@ Current implemented:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@olton/hooks@latest"></script>
 <script>
-    Hooks.useEffect({...})
+    Hooks.useEvent({...})
 </script>
 ```
 
@@ -75,27 +75,6 @@ function onStateChange(){
 ```
 
 ### useEvent
-This is a shortcut for `addEventListener`. You can use hook `useEvent` to quick access to the events.
-```javascript
-import { useEvent } from "@olton/hooks"
-
-// Each time when user click on the button
-useEvent({
-    target: "#btn",
-    event: "click",
-    effect: (event) => console.log(`You clicked on button`)
-})
-
-// One time and remove listener
-useEvent({
-    target: "#btn",
-    event: "click",
-    effect: (event) => console.log(`You clicked on button`),
-    one: true
-})
-```
-
-### useEffect
 This hook is designed to trigger the effect under certain conditions:
 - `load` - perform the effect when the element appears in the document
 - `viewport` - perform the effect when the element appears in the viewport
@@ -104,44 +83,14 @@ This hook is designed to trigger the effect under certain conditions:
 - `data` - perform the effect when the element text content was changed
 
 ```javascript
-import { useEffect, USE_EFFECT_EVENTS } from "@olton/hooks"
+import { useEvent, EVENTS } from "@olton/hooks"
 
-useEffect({
+useEvent({
     target: "#btn",
-    event: USE_EFFECT_EVENTS.LOAD,
-    effect: (target) => console.log(`Element added to document`)
-})
-
-useEffect({
-    target: "#btn",
-    event: USE_EFFECT_EVENTS.VIEWPORT,
+    event: EVENTS.VIEWPORT,
     effect: (target) => console.log(`Element showing in viewport`)
 })
 
-useEffect({
-    target: "#btn",
-    root: "#root-element",
-    event: USE_EFFECT_EVENTS.VIEWPORT,
-    effect: (target) => console.log(`Element showing in root element`)
-})
-
-useEffect({
-    target: "#btn",
-    event: USE_EFFECT_EVENTS.ATTRIBUTE,
-    effect: (target, attribute, value) => console.log(`Attribute changed in Element`)
-})
-
-useEffect({
-    target: "#btn",
-    event: USE_EFFECT_EVENTS.CHILDREN,
-    effect: (target, addedNodes, removedNodes) => console.log(`Element children changed`)
-})
-
-useEffect({
-    target: "#btn",
-    event: USE_EFFECT_EVENTS.DATA,
-    effect: (target, textContent) => console.log(`Element text content was changed`)
-})
 ```
 
 ### useMemo
@@ -171,3 +120,8 @@ const pipeResult = Hooks.usePipe(fn1, fn2, fn3)("Hello")
 console.log(pipeResult)
 // --> Hello world! usePipe() Enjoy!
 ```
+
+### useDebounce
+### useThrottle
+### useCompose
+### useCurry

@@ -1,11 +1,15 @@
-let state = [];
+interface State {
+    value: unknown
+}
+
+const state: State[]  = [];
 let stateIndex = -1
 
-const useState = (initialState: any, onStateChange: any) => {
+const useState = (initialState: unknown, onStateChange: unknown) => {
     const index = stateIndex++
     state[index] = {value: initialState};
 
-    const setState = (arg: any) => {
+    const setState = (arg: unknown) => {
         const old = state[index].value
 
         state[index].value = typeof arg === "function" ? arg(old) : arg

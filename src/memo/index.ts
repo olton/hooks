@@ -1,14 +1,14 @@
-const useMemo = (fn: any) => {
+const useMemo = (fn: unknown) => {
     const cache = new Map()
-    return function(...args: any[]){
-        const key = "" + args.length + args.join("+")
+    return (...args: Array<unknown>) => {
+        const key = `${args.length}${args.join("+")}`
         if (cache.has(key)) {
             return cache.get(key)
-        } else {
-            const result = fn(...args)
-            cache.set(key, result)
-            return result
         }
+        // @ts-ignore
+        const result = fn.apply(null, args)
+        cache.set(key, result)
+        return result
     }
 }
 

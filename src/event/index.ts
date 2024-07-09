@@ -1,4 +1,4 @@
-enum USE_EVENT_EVENTS {
+enum EVENTS {
     LOAD = 'load',
     VIEWPORT = 'viewport',
     ATTRIBUTE = 'attribute',
@@ -6,43 +6,28 @@ enum USE_EVENT_EVENTS {
     DATA = 'data',
 }
 
-type useEventDefaults = {
-    effect: any,
-    target: any,
-    event: USE_EVENT_EVENTS.LOAD,
-    root: null
+type UseEvent = {
+    event: EVENTS,
+    target: string | HTMLElement,
+    root: null | string | HTMLElement,
+    effect: unknown
 }
 
-const useEvent = ({effect, target, event, root}: useEventDefaults) => {
-    let _target, _event = event.toLowerCase()
+const useEvent = ({event, root, target, effect}: UseEvent) => {
+    const _target = typeof target === "string" ? document.querySelector(target) : target;
 
     if (typeof effect !== "function") {
-        throw Error(`Effect must be a function!`)
+        throw Error("Side effect must be a function!")
     }
 
-    if (!target) {
-        throw Error(`Please specify a target element!`)
+    if (!_target) {
+        throw Error("Please specify a target element!")
     }
 
-    if (event === USE_EVENT_EVENTS.LOAD) {
-        _target = target;
-    } else {
-        if (typeof target === "string") {
-            _target = document.querySelector(target)
-        } else if (target instanceof HTMLElement) {
-            _target = target
-        } else {
-            throw Error(`Invalid target element!`)
-        }
-    }
-
-    if (_event === USE_EVENT_EVENTS.LOAD) {
-        const el = document.querySelector(_target)
-        if (el !== null) {
-            effect(el)
-        } else {
+    switch (event) {
+        case EVENTS.LOAD: {
             const observer = new MutationObserver((mutations, observer) => {
-                const el = document.querySelector(_target)
+                const el = document.querySelector(target as unknown as string)
                 if (el !== null) {
                     effect(el)
                     observer.disconnect()
@@ -52,62 +37,81 @@ const useEvent = ({effect, target, event, root}: useEventDefaults) => {
                 childList: true,
                 subtree: true,
             })
+
+            break
         }
-    } else if (_event === USE_EVENT_EVENTS.VIEWPORT) {
-        let _root = root === null ? null : typeof root === "string" ? document.querySelector(root) : root
-        const observerOptions = {
-            root: _root,
-            rootMargin: "0px",
-            threshold: 0.5
+        case EVENTS.VIEWPORT: {
+            const _root = root instanceof HTMLElement ? root : typeof root === "string" ? document.querySelector(root) : null
+            const observerOptions = {
+                root: _root,
+                rootMargin: "0px",
+                threshold: 0.5
+            }
+            const observer = new IntersectionObserver((entries, observer)=>{
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        effect(_target)
+                    }
+                }
+            }, observerOptions)
+            observer.observe(_target)
+
+            break
         }
-        const observer = new IntersectionObserver((entries, observer)=>{
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    effect(_target)
+        case EVENTS.ATTRIBUTE: {
+            const observer = new MutationObserver((mutations) => {
+                for (const mut of mutations) {
+                    if (mut.target === _target && mut.type === 'attributes') {
+                        effect(_target, mut.attributeName, _target.getAttribute(mut.attributeName as string))
+                    }
                 }
             })
-        }, observerOptions)
-        observer.observe(_target)
-    } else if (_event === USE_EVENT_EVENTS.ATTRIBUTE) {
-        const observer = new MutationObserver((mutations) => {
-            for (let mut of mutations) {
-                if (mut.target === _target && mut.type === 'attributes') {
-                    effect(_target, mut.attributeName, _target.getAttribute(mut.attributeName))
-                }
-            }
-        })
-        observer.observe(_target, {
-            attributes: true,
-        })
-    } else if (_event === USE_EVENT_EVENTS.CHILDREN) {
-        const observer = new MutationObserver((mutations) => {
-            for (let mut of mutations) {
-                if (mut.target === _target && mut.type === 'childList') {
-                    effect(_target, mut.addedNodes, mut.removedNodes)
-                }
-            }
-        })
-        observer.observe(_target, {
-            childList: true,
-            subtree: true,
-        })
-    } else if (_event === USE_EVENT_EVENTS.DATA) {
-        const observer = new MutationObserver((mutations) => {
-            for (let mut of mutations) {
-                if (mut.target === _target && mut.type === 'characterData') {
-                    effect(_target, _target.textContent)
-                }
-            }
-        })
-        observer.observe(_target, {
-            characterData: true,
-        })
-    } else {
+            observer.observe(_target, {
+                attributes: true,
+            })
 
+            break
+        }
+        case EVENTS.CHILDREN: {
+            const observer = new MutationObserver((mutations) => {
+                for (const mut of mutations) {
+                    if (mut.target === _target && mut.type === 'childList') {
+                        effect(_target, mut.addedNodes, mut.removedNodes)
+                    }
+                }
+            })
+            observer.observe(_target, {
+                childList: true,
+                subtree: true,
+            })
+
+            break
+        }
+        case EVENTS.DATA: {
+            const observer = new MutationObserver((mutations) => {
+                for (const mut of mutations) {
+                    if (mut.target === _target && mut.type === 'characterData') {
+                        effect(_target, _target.textContent)
+                    }
+                }
+            })
+            observer.observe(_target, {
+                characterData: true,
+            })
+
+            break
+        }
+        default: {
+            if (_target instanceof HTMLElement) {
+                _target.addEventListener(event, (e) => {
+                    effect(_target, e)
+                })
+            }
+        }
     }
 }
 
 export {
     useEvent,
-    USE_EVENT_EVENTS
+    EVENTS
 }

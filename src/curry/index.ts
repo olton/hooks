@@ -1,14 +1,14 @@
-const useCurry = (func: any) => {
-    return function curried(...args: any[]) {
+const useCurry = (func: unknown) => {
+    return function curried(...args: unknown[]) {
+        // @ts-ignore
         if (args.length >= func.length) {
             // @ts-ignore
             return func.apply(this, args);
-        } else {
-            return function(...args2: any[]) {
-                // @ts-ignore
-                return curried.apply(this, args.concat(args2));
-            };
         }
+        return function(...args2: Array<unknown>) {
+            // @ts-ignore
+            return curried.apply(this, args.concat(args2));
+        };
     };
 }
 

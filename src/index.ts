@@ -1,14 +1,14 @@
-import {useState} from "./state"
-import {useEvent, USE_EVENT_EVENTS} from "./event"
-import {useMemo} from "./memo";
-import {useDebounce} from "./debounce";
-import {usePipe} from "./pipe";
-import {useCurry} from "./curry";
-import {useCompose} from "./compose";
-import {useThrottle} from "./throttle";
+import {useState} from "./state/index.js"
+import {useEvent, EVENTS} from "./event/index.js"
+import {useMemo} from "./memo/index.js";
+import {useDebounce} from "./debounce/index.js";
+import {usePipe} from "./pipe/index.js";
+import {useCurry} from "./curry/index.js";
+import {useCompose} from "./compose/index.js";
+import {useThrottle} from "./throttle/index.js";
 
-const version = "0.7.0"
-const build_time = "08.07.2024, 19:53:33"
+const version = "0.8.0"
+const build_time = "09.07.2024, 09:48:56"
 
 const info = () => {
     console.info(`%c Hooks %c v${version} %c ${build_time} `, "color: #ffffff; font-weight: bold; background: #5c2c05", "color: white; background: darkgreen", "color: white; background: #0080fe;")
@@ -17,7 +17,7 @@ const info = () => {
 export {
     useState,
     useEvent,
-    USE_EVENT_EVENTS,
+    EVENTS,
     useMemo,
     useDebounce,
     usePipe,
