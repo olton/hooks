@@ -1,11 +1,11 @@
 {
   "name": "@olton/hooks",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.esm.js",
   "exports": {
-    "types": "./dist/index.d.ts",
+    "types": "./dist/types/index.d.ts",
     "require": "./dist/hooks.cjs.js",
     "import": "./dist/hooks.esm.js"
   },
