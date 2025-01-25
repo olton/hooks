@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 align="center">Metro UI</h1>
+  <h1 align="center">Hooks</h1>
 
     The set of functions to create user hooks.
 </div>
