@@ -14,15 +14,7 @@ Current implemented:
 
 ## Using
 
-### Direct into browser
-```html
-<script src="https://cdn.jsdelivr.net/npm/@olton/hooks@latest"></script>
-<script>
-    Hooks.useEvent({...})
-</script>
-```
-
-### NPM
+### Install
 ```shell
 npm i --save @olton/hooks
 ```
