@@ -1,6 +1,12 @@
 # Hooks
 The sets of hooks
 
+![npm](https://img.shields.io/npm/v/@olton/hooks)
+![GitHub](https://img.shields.io/github/license/olton/hooks)
+![GitHub issues](https://img.shields.io/github/issues/olton/hooks)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/olton/hooks)
+
+
 Current implemented:
 
 + [x] [useState()](#usestate)
