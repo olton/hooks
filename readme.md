@@ -43,7 +43,7 @@ Read about `Hooks` usage in the [Metro UI](https://docs-new.metroui.org.ua/libra
 
 ## License
 
-Hooks is licensed under a [MIT license](LICENSE).
+Hooks are licensed under a [MIT license](LICENSE).
 
 ## Sponsors
 
