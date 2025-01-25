@@ -1,6 +1,6 @@
 {
   "name": "@olton/hooks",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.esm.js",
@@ -14,9 +14,8 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist/* lib/*",
-    "build": "npm run clean && cross-env NODE_ENV=production rollup -c",
-    "dev": "cross-env NODE_ENV=development rollup -c",
-    "watch": "cross-env NODE_ENV=development rollup -c -w",
+    "build": "npm run clean && cross-env MODE=production node build.js",
+    "dev": "npm run clean && cross-env MODE=development node build.js",
     "pub": "npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "biome lint --write ./src"
@@ -40,13 +39,10 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.7",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
+    "@olton/esbuild-plugin-progress": "^0.3.0",
     "cross-env": "^7.0.3",
-    "rollup": "^4.18.0",
-    "rollup-plugin-progress": "^1.1.2",
+    "esbuild": "^0.24.2",
+    "esbuild-plugin-replace": "^1.4.0",
     "shx": "^0.3.4",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3"

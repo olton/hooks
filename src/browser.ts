@@ -8,7 +8,7 @@ import {useCompose} from "./compose/index.ts";
 import {useThrottle} from "./throttle/index.ts";
 import info from "./info/index.ts";
 
-export {
+const Hooks = {
     useState,
     useEvent,
     EVENTS,
@@ -20,3 +20,8 @@ export {
     useThrottle,
     info
 }
+
+// @ts-ignore
+globalThis.Hooks = Hooks
+
+info()
