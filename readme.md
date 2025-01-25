@@ -4,7 +4,7 @@
     The set of functions to create user hooks.
 </div>
 
-![Alt](https://repobeats.axiom.co/api/embed/75c6aba3d69c314c78727354cc6082e916ad1297.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/c2ef4e8e81d471e5d6634d84cef18755ce1d2b63.svg "Repobeats analytics image")
 
 <div align="center">
 
