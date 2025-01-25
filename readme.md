@@ -21,7 +21,28 @@ npm i --save @olton/hooks
 
 ## Population
 
-All functions to create user hooks collected in the global namespace named `Hooks`.
+### Browser
+
+If you use library directly in browser, all functions to create user hooks collected in the global namespace named `Hooks`.
+
+```html
+<script src="https://cdn.statically.io/gh/olton/hooks/master/lib/hooks.js"></script>
+```
+
+### Node.js
+
+If you use library in Node.js, you can import functions from the library.
+
+```javascript
+import Hooks from "@olton/hooks"
+```
+
+or 
+
+```javascript
+import {useMemo} from "@olton/hooks"
+```
+
 
 ## Functions
 
