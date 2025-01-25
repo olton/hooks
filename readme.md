@@ -6,18 +6,17 @@
 
 ![Alt](https://repobeats.axiom.co/api/embed/c2ef4e8e81d471e5d6634d84cef18755ce1d2b63.svg "Repobeats analytics image")
 
-<div align="center">
-
-### Project State
+#### Status
 ![Dependencies](https://img.shields.io/badge/Dependencies-none-darklime.svg)
 ![Package Version](https://img.shields.io/github/package-json/v/olton/hooks)
 ![GitHub Release](https://img.shields.io/github/v/release/olton/hooks)
 ![NPM Version](https://img.shields.io/npm/v/%40olton%2Fhooks)
+![Website](https://img.shields.io/website/https/hooks.org.ua.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?color=7852a9)
 ![Code size](https://img.shields.io/github/languages/code-size/olton/hooks.svg?color=830000)
 ![GitHub JS Size](https://img.shields.io/github/size/olton/hooks/lib%2Fhooks.js?label=JS%20Size&color=8f99ff)
 
-</div>
+---
 
 Current implemented:
 
