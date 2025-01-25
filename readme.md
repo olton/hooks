@@ -1,11 +1,24 @@
+<div align="center">
+
 # Hooks
-The sets of hooks
+> The set of functions to create user hooks.
 
-![npm](https://img.shields.io/npm/v/@olton/hooks)
-![GitHub](https://img.shields.io/github/license/olton/hooks)
-![GitHub issues](https://img.shields.io/github/issues/olton/hooks)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/olton/hooks)
+</div>
 
+![Alt](https://repobeats.axiom.co/api/embed/75c6aba3d69c314c78727354cc6082e916ad1297.svg "Repobeats analytics image")
+
+<div align="center">
+
+### Project State
+![Dependencies](https://img.shields.io/badge/Dependencies-none-darklime.svg)
+![Package Version](https://img.shields.io/github/package-json/v/olton/hooks)
+![GitHub Release](https://img.shields.io/github/v/release/olton/hooks)
+![NPM Version](https://img.shields.io/npm/v/%40olton%2Fhooks)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?color=7852a9)
+![Code size](https://img.shields.io/github/languages/code-size/olton/hooks.svg?color=830000)
+![GitHub JS Size](https://img.shields.io/github/size/olton/hooks/lib%2Fhooks.js?label=JS%20Size&color=8f99ff)
+
+</div>
 
 Current implemented:
 
