@@ -17,7 +17,7 @@ const banner = `
 
 const options = {
     bundle: true,
-    minify: true,
+    minify: false,
     sourcemap: false,
     banner: {
         js: banner
@@ -29,6 +29,7 @@ if (production) {
         ...options,
         entryPoints: ["src/index.ts"],
         outfile: "dist/hooks.js",
+        format: "esm",
         plugins: [
             progress({
                 text: 'Building Hooks for NPM...',
@@ -45,6 +46,7 @@ if (production) {
         ...options,
         entryPoints: ["src/browser.ts"],
         outfile: "lib/hooks.js",
+        format: "iife",
         plugins: [
             progress({
                 text: 'Building Hooks for Browser...',
@@ -61,6 +63,7 @@ if (production) {
         ...options,
         entryPoints: ["src/index.ts"],
         outfile: "dist/hooks.js",
+        format: "esm",
         plugins: [
             progress({
                 text: 'Building Hooks for NPM...',
@@ -77,6 +80,7 @@ if (production) {
         ...options,
         entryPoints: ["src/browser.ts"],
         outfile: "lib/hooks.js",
+        format: "iife",
         plugins: [
             progress({
                 text: 'Building Hooks for Browser...',
