@@ -1,10 +1,9 @@
 {
   "name": "@olton/hooks",
-  "version": "0.12.1",
+  "version": "0.12.3",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.js",
-  "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
   ],
