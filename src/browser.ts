@@ -6,6 +6,7 @@ import {usePipe} from "./pipe/index.ts";
 import {useCurry} from "./curry/index.ts";
 import {useCompose} from "./compose/index.ts";
 import {useThrottle} from "./throttle/index.ts";
+import {useId} from "./id/index.js";
 import info from "./info/index.ts";
 
 const Hooks = {
@@ -18,6 +19,7 @@ const Hooks = {
     useCurry,
     useCompose,
     useThrottle,
+    useId,
     info
 }
 
