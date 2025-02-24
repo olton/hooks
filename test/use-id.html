@@ -16,10 +16,13 @@
     Hooks.info()
     
     function getId() {
-        const b1 = Hooks.useId(".b1")
-        const b2 = Hooks.useId(".b2")
-        console.log(b1)
-        console.log(b2)
+        const h1 = document.querySelector("h1")
+        console.log(Hooks.useId())
+        console.log(Hooks.useId())
+        console.log(Hooks.useId(".b1"))
+        console.log(Hooks.useId(".b2"))
+        console.log(Hooks.useId(h1))
+        console.log(Hooks.useId(h1))
     }
     
     globalThis.getId = getId

@@ -1,23 +1,26 @@
-const id_store = new WeakMap()
+const id_store = new Map()
 let id_counter = 0
 
-type Key = string | number | symbol | HTMLElement
+type Key = string | number | HTMLElement
 type IdOptions = {
     prefix?: string
     divider?: string
 }
 
-const useId = (el: Key, options: IdOptions = {}) => {
-    const {divider = "_", prefix = "x"} = options
+const createKey = () => Object.freeze({})
 
-    if (typeof el === 'object' && el !== null && id_store.has(el)) {
-        return id_store.get(el)
+const useId = (key?: Key, options: IdOptions = {}) => {
+    const actualKey = key ?? createKey()
+    const {divider = "-", prefix = "id"} = options
+
+    if (id_store.has(actualKey)) {
+        return id_store.get(actualKey)
     }
 
     const maxAttempts = 1000
     let attempts = 0
 
-    const gen = () => `${divider}${divider}id${divider}${prefix}${divider}${id_counter++}`
+    const gen = () => `__${prefix}${divider}${id_counter++}`
     
     let id = gen()
 
@@ -28,10 +31,8 @@ const useId = (el: Key, options: IdOptions = {}) => {
 
         id = gen()
     }
-    
-    if (typeof el === 'object' && el !== null) {
-        id_store.set(el, id)
-    }
+
+    id_store.set(actualKey, id)
 
     return id    
 }
