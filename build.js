@@ -41,23 +41,6 @@ if (production) {
             })
         ]
     }).catch(() => process.exit(1))
-
-    await build({
-        ...options,
-        entryPoints: ["src/browser.ts"],
-        outfile: "lib/hooks.js",
-        format: "iife",
-        plugins: [
-            progress({
-                text: 'Building Hooks for Browser...',
-                succeedText: 'Built successfully in %s ms!'
-            }),
-            replace({
-                '__BUILD_TIME__': new Date().toLocaleString(),
-                '__VERSION__': new Date().getFullYear(),
-            })
-        ]
-    }).catch(() => process.exit(1))
 } else {
     const ctxEsm = await context({
         ...options,
@@ -75,26 +58,7 @@ if (production) {
             })
         ]
     })
-
-    const ctxLib = await context({
-        ...options,
-        entryPoints: ["src/browser.ts"],
-        outfile: "lib/hooks.js",
-        format: "iife",
-        plugins: [
-            progress({
-                text: 'Building Hooks for Browser...',
-                succeedText: 'Built successfully in %s ms!'
-            }),
-            replace({
-                '__BUILD_TIME__': new Date().toLocaleString(),
-                '__VERSION__': new Date().getFullYear(),
-            })
-        ]
-    })
-
     await Promise.all([
         ctxEsm.watch(), 
-        ctxLib.watch()
     ]).catch(() => process.exit(1))
 }
