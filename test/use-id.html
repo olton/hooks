@@ -9,8 +9,10 @@
     <h1>Hello World!</h1>
     <button onclick="getId()">Clicks</button>
 </div>
-<script src="../lib/hooks.js"></script>
-<script>
+<script src="../dist/hooks.js" type="module"></script>
+<script type="module">
+    import * as Hooks from "../dist/hooks.js"
+    
     Hooks.info()
     
     function getId() {
@@ -19,6 +21,8 @@
         console.log(b1)
         console.log(b2)
     }
+    
+    globalThis.getId = getId
 </script>
 </body>
 </html>

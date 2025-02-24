@@ -37,7 +37,7 @@ if (production) {
             }),
             replace({
                 '__BUILD_TIME__': new Date().toLocaleString(),
-                '__VERSION__': new Date().getFullYear(),
+                '__VERSION__': version,
             })
         ]
     }).catch(() => process.exit(1))
@@ -54,7 +54,7 @@ if (production) {
             }),
             replace({
                 '__BUILD_TIME__': new Date().toLocaleString(),
-                '__VERSION__': new Date().getFullYear(),
+                '__VERSION__': version,
             })
         ]
     })
