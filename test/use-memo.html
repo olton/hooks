@@ -9,13 +9,16 @@
     <h1>useMemo</h1>
     <button id="b1">Clicks (0)</button>
 </div>
-<script src="../lib/hooks.js"></script>
-<script>
-    const factorial = Hooks.useMemo( n => {
+<script type="module">
+    import { info, useMemo } from "../dist/hooks.js"
+
+    const factorial = useMemo( n => {
         return n <= 1 ? 1 : n * factorial(n-1)
     })
     console.log(factorial(5))
     console.log(factorial(5))
+
+    console.log(factorial.clearCache) // true
 </script>
 </body>
 </html>

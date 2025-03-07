@@ -9,20 +9,17 @@
     <h1>Hello World!</h1>
     <button onclick="getId()">Clicks</button>
 </div>
-<script src="../dist/hooks.js" type="module"></script>
 <script type="module">
-    import * as Hooks from "../dist/hooks.js"
-    
-    Hooks.info()
+    import {useId} from "../dist/hooks.js"
     
     function getId() {
         const h1 = document.querySelector("h1")
-        console.log(Hooks.useId())
-        console.log(Hooks.useId())
-        console.log(Hooks.useId(".b1"))
-        console.log(Hooks.useId(".b2"))
-        console.log(Hooks.useId(h1))
-        console.log(Hooks.useId(h1))
+        console.log(useId())
+        console.log(useId())
+        console.log(useId(".b1"))
+        console.log(useId(".b2"))
+        console.log(useId(h1))
+        console.log(useId(h1))
     }
     
     globalThis.getId = getId

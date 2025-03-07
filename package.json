@@ -1,6 +1,6 @@
 {
   "name": "@olton/hooks",
-  "version": "0.12.6",
+  "version": "0.13.0",
   "description": "The set of js hooks.",
   "type": "module",
   "main": "dist/hooks.js",
@@ -12,7 +12,7 @@
     "build": "npm run clean && cross-env MODE=production node build.js",
     "dev": "npm run clean && cross-env MODE=development node build.js",
     "pub": "npm publish --access public",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_OPTIONS=\"--import tsx\" easytest --verbose --include=__tests__/*.test.ts",
     "lint": "biome lint --write ./src"
   },
   "keywords": [
@@ -34,12 +34,14 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@olton/easytest": "^0.41.1",
     "@olton/esbuild-plugin-progress": "^0.3.0",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.0",
     "esbuild-plugin-replace": "^1.4.0",
     "shx": "^0.3.4",
-    "tslib": "^2.6.3",
-    "typescript": "^5.5.3"
+    "tslib": "^2.8.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }

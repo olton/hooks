@@ -1,0 +1,17 @@
+{
+  "67c90bffe5fe59cc4ef20654228a2e69fb1e037e4f87c959f6a5fa036571459c": {
+    "file": "__tests__\\compose.test.js",
+    "tests": 1,
+    "duration": 0.7239
+  },
+  "de7677522d813f16335b84a2eed54b0c9f60e061960e149fbc7b94b7dcb512ad": {
+    "file": "__tests__\\compose.test.js",
+    "tests": 1,
+    "duration": 0.722
+  },
+  "2fbf6fbcb682710e5347a0a7d6fcce615de47c8b5efd78c39e5ea2b8c39356f6": {
+    "file": "__tests__\\compose.test.ts",
+    "tests": 1,
+    "duration": 1.0719
+  }
+}

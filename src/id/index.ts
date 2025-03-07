@@ -1,40 +1,102 @@
-const id_store = new Map()
-let id_counter = 0
+// Надежное хранилище для идентификаторов
+const idStore = new Map<Key, string>();
+let idCounter = 0;
 
-type Key = string | number | HTMLElement
+type Key = string | number | HTMLElement | symbol | object;
 type IdOptions = {
-    prefix?: string
-    divider?: string
+    prefix?: string;
+    divider?: string;
+    forceNew?: boolean;
+};
+
+/**
+ * Нормализует строковое представление ключа для использования в ID
+ */
+function normalizeKeyForId(keyStr: string): string {
+    // Заменяем недопустимые символы на безопасные
+    return keyStr.replace(/[^a-zA-Z0-9_-]/g, '_');
 }
 
-const createKey = () => Object.freeze({})
+/**
+ * Создает уникальный идентификатор
+ * @param key Ключ для идентификатора (опционально)
+ * @param options Опции для генерации ID
+ * @returns Уникальный идентификатор
+ */
+function useId(key?: Key, options: IdOptions = {}): string {
+    // Создаем уникальный ключ, если не предоставлен
+    const actualKey = key ?? Symbol('id-key');
+    const { divider = "-", prefix = "id", forceNew = false } = options;
 
-const useId = (key?: Key, options: IdOptions = {}) => {
-    const actualKey = key ?? createKey()
-    const {divider = "-", prefix = "id"} = options
-
-    if (id_store.has(actualKey)) {
-        return id_store.get(actualKey)
+    // Если ID уже существует для этого ключа и не требуется новый
+    if (!forceNew && idStore.has(actualKey)) {
+        return idStore.get(actualKey)!;
     }
 
-    const maxAttempts = 1000
-    let attempts = 0
+    const isClient = typeof document !== 'undefined';
+    const maxAttempts = 1000;
+    let attempts = 0;
 
-    const gen = () => `__${prefix}${divider}${id_counter++}`
-    
-    let id = gen()
+    // Функция генерации ID
+    const generateId = (): string => {
+        let keyType: string;
 
-    while (document.getElementById(id)) {
-        if (attempts++ > maxAttempts) {
-            throw new Error('Could not generate unique ID')
+        if (key instanceof HTMLElement) {
+            keyType = key.tagName.toLowerCase();
+        } else if (typeof key === 'object' && key !== null) {
+            keyType = 'object';
+        } else if (key !== undefined) {
+            // Нормализуем строковое представление ключа
+            keyType = normalizeKeyForId(String(key));
+        } else {
+            keyType = 'generic';
         }
 
-        id = gen()
+        return `${prefix}${divider}${keyType}${divider}${idCounter++}`;
+    };
+
+    let id = generateId();
+
+    // Проверка на уникальность в DOM (только в браузере)
+    if (isClient) {
+        while (document.getElementById(id)) {
+            if (attempts++ > maxAttempts) {
+                throw new Error('useId: не удалось сгенерировать уникальный ID после многочисленных попыток');
+            }
+            id = generateId();
+        }
     }
 
-    id_store.set(actualKey, id)
-
-    return id    
+    // Сохраняем ID в хранилище
+    idStore.set(actualKey, id);
+    return id;
 }
 
-export { useId }
+/**
+ * Освобождает идентификатор для указанного ключа
+ */
+function releaseId(key: Key): boolean {
+    return idStore.delete(key);
+}
+
+/**
+ * Проверяет существование ID для указанного ключа
+ */
+function hasId(key: Key): boolean {
+    return idStore.has(key);
+}
+
+/**
+ * Сбрасывает все сохраненные идентификаторы
+ */
+function resetIds(): void {
+    idStore.clear();
+    idCounter = 0;
+}
+
+export {
+    useId,
+    releaseId,
+    hasId,
+    resetIds
+}
