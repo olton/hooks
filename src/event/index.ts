@@ -13,6 +13,35 @@ type UseEvent = {
     effect: unknown
 }
 
+/**
+ * The `useEvent` hook is a utility for handling various events and mutations on DOM elements.
+ * It allows you to specify an event type, a target element, and a callback function that will be executed when the event occurs.
+ *
+ * ## Functions Provided:
+ * - `useEvent`: Main function to set up event listeners or mutation observers.
+ *
+ * ## Usage Examples:
+ *
+ * ### Load Event
+ * ```typescript
+ * useEvent({
+ *     event: EVENTS.LOAD,
+ *     target: '#myElement',
+ *     effect: (el) => console.log('Element loaded:', el),
+ * });
+ * ```
+ *
+ * ### Viewport Event
+ * ```typescript
+ * useEvent({
+ *     event: EVENTS.VIEWPORT,
+ *     target: '#myElement',
+ *     root: null,
+ *     effect: (el) => console.log('Element in viewport:', el),
+ * });
+ * ```
+ *
+ */
 const useEvent = ({event, root, target, effect}: UseEvent) => {
     const _target = typeof target === "string" ? document.querySelector(target) : target;
 

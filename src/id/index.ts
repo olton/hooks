@@ -1,4 +1,3 @@
-// Надежное хранилище для идентификаторов
 const idStore = new Map<Key, string>();
 let idCounter = 0;
 
@@ -10,18 +9,49 @@ type IdOptions = {
 };
 
 /**
- * Нормализует строковое представление ключа для использования в ID
+ * Normalizes the key line for use in the identifier
+ * Replaces unacceptable characters with safe
  */
 function normalizeKeyForId(keyStr: string): string {
     // Заменяем недопустимые символы на безопасные
     return keyStr.replace(/[^a-zA-Z0-9_-]/g, '_');
 }
 
+
 /**
- * Создает уникальный идентификатор
- * @param key Ключ для идентификатора (опционально)
- * @param options Опции для генерации ID
- * @returns Уникальный идентификатор
+ * Generates a unique ID associated with a given key, utilizing options for customization.
+ * The IDs are stored internally to ensure they are reused unless `forceNew` is set in the `options`.
+ *
+ * @param {Key} [key] - The key to associate with the unique ID. It can be a string, number,
+ * HTMLElement, symbol, or object. If not provided, a generic symbol-based key is used.
+ * @param {IdOptions} [options] - Options to customize the generated ID.
+ * @param {string} [options.prefix="id"] - A prefix for the generated ID.
+ * @param {string} [options.divider="-"] - A divider to separate components of the ID.
+ * @param {boolean} [options.forceNew=false] - If `true`, forces the generation of a new ID even if one already exists for the key.
+ *
+ * @returns {string} - A unique ID string.
+ *
+ * @example
+ * // Generate an ID for a string key
+ * const id1 = useId("my-key");
+ * console.log(id1); // Outputs: "id-my_key-0" (depends on current counter)
+ *
+ * @example
+ * // Generate an ID with customization options
+ * const id2 = useId("customElement", { prefix: "custom", divider: ".", forceNew: true });
+ * console.log(id2); // Outputs: "custom.customElement.0" (depends on current counter)
+ *
+ * @example
+ * // Reuse an existing ID for the same key
+ * const id3 = useId("my-key");
+ * console.log(id3 === id1); // true
+ *
+ * @example
+ * // Generate IDs for different key types
+ * const id4 = useId(symbolKey);
+ * const id5 = useId(domElement);
+ * console.log(id4); // Example: "id-symbol-1"
+ * console.log(id5); // Example: "id-div-2"
  */
 function useId(key?: Key, options: IdOptions = {}): string {
     // Создаем уникальный ключ, если не предоставлен
