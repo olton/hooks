@@ -9,6 +9,6 @@
 		"skipLibCheck": true,
 		"moduleResolution": "NodeNext",
 		"declarationDir": "./dist/types",
-		"allowImportingTsExtensions": true,
+		"allowImportingTsExtensions": true
 	}
 }

@@ -10,6 +10,6 @@ test('useCompose - should compose functions correctly', () => {
 
     // Перевіряємо обчислення
     expect(result(3)).toBe(7); // (3 * 2) + 1 = 7
-    // expect(funcA).toHaveBeenCalledWith(6);
-    // expect(funcB).toHaveBeenCalledWith(3);
+    expect(funcA).toHaveBeenCalledWith([6]);
+    expect(funcB).toHaveBeenCalledWith([3]);
 });

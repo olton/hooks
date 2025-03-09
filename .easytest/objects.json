@@ -13,5 +13,10 @@
     "file": "__tests__\\compose.test.ts",
     "tests": 1,
     "duration": 1.0719
+  },
+  "c3c6de89301170d3921d57bcec1a59530d4fc4c770a718a0c0d474ba0d8020e8": {
+    "file": "__tests__\\compose.test.ts",
+    "tests": 1,
+    "duration": 0.8753
   }
 }
