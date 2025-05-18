@@ -12,7 +12,7 @@
     "build": "npm run clean && cross-env MODE=production node build.js",
     "dev": "npm run clean && cross-env MODE=development node build.js",
     "pub": "npm publish --access public",
-    "test": "cross-env NODE_OPTIONS=\"--import tsx\" easytest --verbose --include=__tests__/*.test.ts",
+    "test": "cross-env NODE_OPTIONS=\"--import tsx\" latte --verbose",
     "lint": "biome lint --write ./src"
   },
   "keywords": [
@@ -33,15 +33,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
-    "@olton/easytest": "^0.41.1",
+    "@biomejs/biome": "1.9.4",
     "@olton/esbuild-plugin-progress": "^0.3.0",
+    "@olton/latte": "^0.16.2",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.25.4",
     "esbuild-plugin-replace": "^1.4.0",
-    "shx": "^0.3.4",
+    "shx": "^0.4.0",
     "tslib": "^2.8.1",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }
